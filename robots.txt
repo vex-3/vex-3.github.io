@@ -1,0 +1,42 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://vex-3.github.io/sitemap.xml
+
+# Disallow admin or private areas (if any)
+Disallow: /admin/
+Disallow: /private/
+
+# Allow all game directories
+Allow: /ovo1/
+Allow: /ovo2/
+Allow: /vex3/
+Allow: /vex4/
+Allow: /vex5/
+Allow: /vex6/
+Allow: /vex7/
+Allow: /vex-8/
+Allow: /vex-9/
+Allow: /vex-3-xmas/
+Allow: /vex-x3m/
+Allow: /vex-x3m-2/
+Allow: /vex-hyper-dash/
+
+# Allow CSS and JS files
+Allow: /css/
+Allow: /js/
+Allow: /*.css$
+Allow: /*.js$
+
+# Allow images
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.gif$
+Allow: /*.svg$
+Allow: /*.webp$
+
+# Crawl-delay (optional, can be removed if not needed)
+Crawl-delay: 1
+

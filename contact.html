@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/3.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us | Vex 3</title>
+    <style>
+      :root {
+        --neon-primary: #00d4ff; /* Cyan */
+        --neon-secondary: #ff6b35; /* Orange */
+        --dark-bg: #0a0a0a;
+        --card-bg: #151515;
+        --gradient: linear-gradient(
+          45deg,
+          var(--neon-primary),
+          var(--neon-secondary)
+        );
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Arial", sans-serif;
+      }
+
+      body {
+        background: var(--dark-bg);
+        color: #fff;
+        line-height: 1.6;
+      }
+
+      .navbar {
+        background: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--neon-primary);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 1000;
+        padding: 1rem 5%;
+      }
+
+      .nav-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .logo {
+        font-size: 2rem;
+        font-weight: 700;
+        background: var(--gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .contact-container {
+        max-width: 800px;
+        margin: 120px auto 40px;
+        padding: 20px;
+      }
+
+      .contact-header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .contact-header h1 {
+        font-size: 3rem;
+        margin-bottom: 15px;
+        background: var(--gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .contact-form {
+        background: var(--card-bg);
+        padding: 40px;
+        border-radius: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--neon-primary);
+      }
+
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 12px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        color: #fff;
+        font-size: 16px;
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: var(--neon-primary);
+        box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+      }
+
+      .submit-btn {
+        background: var(--gradient);
+        color: white;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .submit-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+      }
+
+      .contact-info {
+        margin-top: 40px;
+        text-align: center;
+        color: #ccc;
+      }
+
+      .contact-info p {
+        margin: 10px 0;
+      }
+
+      .footer {
+        background: var(--gradient);
+        padding: 40px 5%;
+        margin-top: 50px;
+        color: white;
+      }
+
+      .footer-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 20px;
+      }
+
+      .footer-links a {
+        color: white;
+        text-decoration: none;
+        padding: 8px 20px;
+        border-radius: 25px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        transition: all 0.3s ease;
+      }
+
+      .footer-links a:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: white;
+        transform: translateY(-3px);
+      }
+
+      @media (max-width: 768px) {
+        .contact-container {
+          padding: 15px;
+        }
+
+        .contact-form {
+          padding: 20px;
+        }
+
+        .contact-header h1 {
+          font-size: 2rem;
+        }
+
+        .footer-content {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .footer-links {
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav-content">
+        <div class="logo">
+          <a href="/index.html" style="text-decoration: none; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">VEX 3</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="contact-container">
+      <div class="contact-header">
+        <h1>Contact Us</h1>
+        <p>Have questions? We'd love to hear from you.</p>
+      </div>
+
+      <form class="contact-form" action="#" method="POST">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <input type="text" id="subject" name="subject" required />
+        </div>
+
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="6" required></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
+
+      <div class="contact-info">
+        <p>Or reach us directly at:</p>
+        <p>Email: support@vex3.com</p>
+        <p>Hours: Monday - Friday, 9:00 AM - 5:00 PM EST</p>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <p>© 2025 Vex 3. All Rights Reserved.</p>
+        <div class="footer-links">
+          <a href="/termsofuse.html">Terms of Service</a>
+          <a href="/privacypolicy.html">Privacy Policy</a>
+          <a href="/contact.html">Contact Us</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
+
