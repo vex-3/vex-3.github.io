@@ -1,19 +1,19 @@
 /**
  * Ads Management Script
- * This file handles loading and displaying ads on the Basketball Bros website
+ * This file handles loading and displaying ads on the Vex 3 website
  */
 
-(function() {
-  'use strict';
+(function () {
+  "use strict";
 
   // Ad configuration
   const adConfig = {
     sidebarAd: {
-      containerId: 'sidebar-ad',
+      containerId: "sidebar-ad",
       width: 336,
       height: 280,
-      enabled: true
-    }
+      enabled: true,
+    },
   };
 
   /**
@@ -25,8 +25,8 @@
     }
 
     // Wait for DOM to be ready
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', loadSidebarAd);
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", loadSidebarAd);
     } else {
       loadSidebarAd();
     }
@@ -38,9 +38,9 @@
    */
   function loadSidebarAd() {
     const adContainer = document.getElementById(adConfig.sidebarAd.containerId);
-    
+
     if (!adContainer) {
-      console.warn('Sidebar ad container not found');
+      console.warn("Sidebar ad container not found");
       return;
     }
 
@@ -79,9 +79,9 @@
    */
   function showAdPlaceholder(container) {
     // Remove the label if ad is loaded
-    const label = container.querySelector('.ad-label');
+    const label = container.querySelector(".ad-label");
     if (label) {
-      label.style.display = 'none';
+      label.style.display = "none";
     }
 
     // You can add a loading indicator here if needed
@@ -96,7 +96,8 @@
     return (
       rect.top >= 0 &&
       rect.left >= 0 &&
-      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.bottom <=
+        (window.innerHeight || document.documentElement.clientHeight) &&
       rect.right <= (window.innerWidth || document.documentElement.clientWidth)
     );
   }
@@ -106,21 +107,24 @@
    */
   function lazyLoadAd() {
     const adContainer = document.getElementById(adConfig.sidebarAd.containerId);
-    
+
     if (!adContainer) {
       return;
     }
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          loadSidebarAd();
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {
-      rootMargin: '100px'
-    });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            loadSidebarAd();
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        rootMargin: "100px",
+      }
+    );
 
     observer.observe(adContainer);
   }
@@ -129,10 +133,8 @@
   initAds();
 
   // Export functions for manual control if needed
-  window.BasketballBrosAds = {
+  window.Vex3Ads = {
     loadSidebarAd: loadSidebarAd,
-    initAds: initAds
+    initAds: initAds,
   };
-
 })();
-
