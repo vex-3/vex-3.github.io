@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+    <meta name="googlebot" content="index, follow" />
+
+    <!-- Primary Meta Tags -->
+    <title>All Games | Vex 3 - Complete Game Collection</title>
+    <meta name="title" content="All Games | Vex 3 - Complete Game Collection" />
+    <meta
+      name="description"
+      content="🕹️ Play all games on Vex 3! Complete collection of platformer games including Vex 3, Vex series, Ovo series and more. All games are free and unblocked!"
+    />
+    <meta
+      name="keywords"
+      content="Vex 3 games, all games, vex 3 game collection, platformer games, free games, unblocked games"
+    />
+    <meta name="author" content="Vex 3" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://vex-3.github.io/all-games.html" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./3.png" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://vex-3.github.io/all-games.html" />
+    <meta
+      property="og:title"
+      content="All Games | Vex 3 - Complete Game Collection"
+    />
+    <meta
+      property="og:description"
+      content="Play all games on Vex 3! Complete collection of platformer games."
+    />
+    <meta property="og:image" content="https://vex-3.github.io/vex3.png" />
+    <meta property="og:site_name" content="Vex 3" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://vex-3.github.io/all-games.html" />
+    <meta
+      name="twitter:title"
+      content="All Games | Vex 3 - Complete Game Collection"
+    />
+    <meta
+      name="twitter:description"
+      content="Play all games on Vex 3! Complete collection of platformer games."
+    />
+    <meta name="twitter:image" content="https://vex-3.github.io/vex3.png" />
+
+    <!-- External CSS -->
+    <link rel="preload" href="/css/styles.css" as="style" />
+    <link
+      rel="stylesheet"
+      href="/css/styles.css"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript><link rel="stylesheet" href="/css/styles.css" /></noscript>
+
+    <!-- Custom CSS for All Games Page -->
+    <style>
+      /* Override layout for all-games page - full width, no sidebar */
+      .games-layout {
+        grid-template-columns: 1fr !important;
+        max-width: 1600px !important;
+        padding: 0 2rem !important;
+      }
+
+      .games-column {
+        width: 100% !important;
+      }
+
+      /* 10 games per row for all-games page - Poki style */
+      .games-grid {
+        grid-template-columns: repeat(10, 1fr) !important;
+        grid-auto-rows: minmax(0, 1fr);
+        grid-auto-flow: dense !important; /* Fill gaps automatically */
+        gap: 0.6rem !important;
+        max-width: 100% !important;
+      }
+
+      /* Game card - Poki style square layout */
+      .game-card {
+        width: 100%;
+        aspect-ratio: 1;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        grid-column: span 1;
+        grid-row: span 1;
+      }
+
+      /* Large game card - 2x2 (4 icon nhỏ) */
+      .game-card.large {
+        grid-column: span 2;
+        grid-row: span 2;
+      }
+
+      /* Extra large game card - 3x3 (9 icon nhỏ) */
+      .game-card.xlarge {
+        grid-column: span 3;
+        grid-row: span 3;
+      }
+
+      /* Adjust font sizes for larger cards */
+      .game-card.large .game-title {
+        font-size: 1rem;
+      }
+
+      .game-card.large .play-btn {
+        padding: 0.7rem 1rem;
+        font-size: 0.9rem;
+      }
+
+      .game-card.xlarge .game-title {
+        font-size: 1.1rem;
+      }
+
+      .game-card.xlarge .play-btn {
+        padding: 0.8rem 1.2rem;
+        font-size: 1rem;
+      }
+
+      .game-card.xlarge .game-info {
+        padding: 1rem;
+      }
+
+      /* Square game image - Poki style */
+      .game-image-wrapper {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 12px 12px 0 0;
+        overflow: hidden;
+        flex-shrink: 0;
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .game-image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        border-radius: 12px 12px 0 0;
+        cursor: pointer;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+        padding: 0.5rem;
+      }
+
+      .game-image:hover {
+        transform: scale(1.05);
+        opacity: 0.9;
+      }
+
+      /* Tooltip for game image - position relative is already set above */
+
+      .game-image-wrapper::after {
+        content: attr(data-game-title);
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-8px);
+        background: rgba(0, 0, 0, 0.9);
+        color: var(--neon-primary);
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        z-index: 10;
+        border: 1px solid rgba(0, 212, 255, 0.3);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      }
+
+      .game-image-wrapper::before {
+        content: "";
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-2px);
+        border: 6px solid transparent;
+        border-top-color: rgba(0, 0, 0, 0.9);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        z-index: 11;
+      }
+
+      .game-image-wrapper:hover::after,
+      .game-image-wrapper:hover::before {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+
+      /* Game info section */
+      .game-info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 0.8rem;
+        min-height: 0;
+      }
+
+      .game-title {
+        font-size: 0.85rem;
+        margin-bottom: 0.4rem;
+        line-height: 1.2;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+      }
+
+      .play-btn {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.8rem;
+        margin-top: auto;
+      }
+
+      /* Responsive adjustments - maintain Poki style layout */
+      @media (max-width: 2000px) {
+        .games-grid {
+          grid-template-columns: repeat(8, 1fr) !important;
+          gap: 0.6rem !important;
+        }
+        .game-card.xlarge {
+          grid-column: span 3;
+          grid-row: span 3;
+        }
+        .game-card.large {
+          grid-column: span 2;
+          grid-row: span 2;
+        }
+      }
+
+      @media (max-width: 1600px) {
+        .games-grid {
+          grid-template-columns: repeat(6, 1fr) !important;
+          gap: 0.6rem !important;
+        }
+        .game-card.xlarge {
+          grid-column: span 3;
+          grid-row: span 3;
+        }
+        .game-card.large {
+          grid-column: span 2;
+          grid-row: span 2;
+        }
+      }
+
+      @media (max-width: 1200px) {
+        .games-grid {
+          grid-template-columns: repeat(5, 1fr) !important;
+          gap: 0.5rem !important;
+        }
+        .game-card.xlarge {
+          grid-column: span 3;
+          grid-row: span 3;
+        }
+        .game-card.large {
+          grid-column: span 2;
+          grid-row: span 2;
+        }
+        .game-title {
+          font-size: 0.9rem;
+        }
+        .play-btn {
+          padding: 0.5rem 0.8rem;
+          font-size: 0.85rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .games-grid {
+          grid-template-columns: repeat(3, 1fr) !important;
+          gap: 0.5rem !important;
+        }
+        .game-card.xlarge {
+          grid-column: span 2;
+          grid-row: span 2;
+        }
+        .game-card.large {
+          grid-column: span 2;
+          grid-row: span 2;
+        }
+        .games-layout {
+          padding: 0 1rem !important;
+        }
+        .game-info {
+          padding: 0.7rem;
+        }
+        .search-container {
+          top: 70px !important;
+          padding: 0.8rem !important;
+        }
+        .games-section {
+          padding-top: 110px !important;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .games-grid {
+          grid-template-columns: repeat(2, 1fr) !important;
+          gap: 0.4rem !important;
+        }
+        .game-card.xlarge,
+        .game-card.large {
+          grid-column: span 2;
+          grid-row: span 2;
+        }
+        .game-card {
+          max-width: none;
+        }
+        .search-container {
+          top: 60px !important;
+          padding: 0.6rem !important;
+          border-radius: 0 0 15px 15px !important;
+        }
+        .games-section {
+          padding-top: 100px !important;
+        }
+      }
+
+      /* Sticky search bar - follows scroll like navbar */
+      .search-container {
+        position: sticky !important;
+        top: 80px !important; /* Below navbar */
+        z-index: 100 !important;
+        background: rgba(10, 10, 10, 0.95) !important;
+        backdrop-filter: blur(10px) !important;
+        padding: 1rem !important;
+        margin: 0 auto 2rem !important;
+        max-width: 600px !important;
+        border-radius: 0 0 20px 20px !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+        transition: all 0.3s ease !important;
+      }
+
+      /* Add padding to games section to account for sticky search */
+      .games-section {
+        padding-top: 120px !important; /* Space for navbar + search */
+      }
+
+      /* Better spacing for games section */
+      .games-section {
+        padding-bottom: 4rem;
+      }
+
+      /* Hover effect - Poki style */
+      .game-card:hover {
+        transform: translateY(-4px);
+        transition: transform 0.2s ease;
+      }
+    </style>
+
+    <!-- Google Analytics -->
+    <script src="/js/analytics.js" defer></script>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav-content">
+        <div class="logo">
+          <a href="/index.html">VEX 3</a>
+        </div>
+        <div class="nav-links">
+          <a
+            href="/index.html"
+            style="color: #fff; text-decoration: none; padding: 0.5rem 1rem"
+            >Home</a
+          >
+          <a
+            href="/all-games.html"
+            style="
+              color: var(--neon-primary);
+              text-decoration: none;
+              padding: 0.5rem 1rem;
+            "
+            >All Games</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- Breadcrumb Navigation -->
+    <nav aria-label="breadcrumb" class="breadcrumb-nav">
+      <div class="breadcrumb-container">
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li>›</li>
+          <li>All Games</li>
+        </ol>
+      </div>
+    </nav>
+
+    <main>
+      <section class="games-section">
+        <h2 class="section-title">All Games on Vex 3</h2>
+
+        <!-- Search Bar -->
+        <div class="search-container">
+          <div style="position: relative">
+            <input
+              type="text"
+              id="gameSearch"
+              placeholder="Search games..."
+              style="
+                width: 100%;
+                padding: 1rem 3rem 1rem 1.5rem;
+                font-size: 1.1rem;
+                border: 2px solid rgba(0, 212, 255, 0.3);
+                border-radius: 50px;
+                background: rgba(0, 0, 0, 0.5);
+                color: #fff;
+                outline: none;
+                transition: all 0.3s ease;
+              "
+              oninput="filterGames()"
+            />
+            <svg
+              style="
+                position: absolute;
+                right: 1.5rem;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 24px;
+                height: 24px;
+                color: var(--neon-primary);
+                pointer-events: none;
+              "
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
+            </svg>
+          </div>
+        </div>
+
+        <!-- All Games Grid -->
+        <div class="games-layout">
+          <div class="games-column">
+            <div class="games-grid">
+              <!-- Ovo 1 Game Card -->
+              <div
+                class="game-card"
+                itemscope
+                itemtype="https://schema.org/VideoGame"
+              >
+                <a
+                  href="/ovo1/index.html"
+                  class="game-image-wrapper"
+                  data-game-title="Ovo 1"
+                  onclick="event.preventDefault(); openGameModal('/ovo1/index.html', 'Ovo 1');"
+                >
+                  <img
+                    src="/ovo1/icon-256.png"
+                    alt="Ovo 1 - Free Online Platformer Game"
+                    class="game-image"
+                    loading="lazy"
+                    decoding="async"
+                    itemprop="image"
+                    title="Ovo 1"
+                  />
+                </a>
+                <div class="game-info">
+                  <h3 class="game-title">Ovo 1</h3>
+                  <a href="/ovo1/index.html" class="play-btn">Play Now</a>
+                </div>
+              </div>
+
+              <!-- Ovo 2 Game Card -->
+              <div
+                class="game-card"
+                itemscope
+                itemtype="https://schema.org/VideoGame"
+              >
+                <a
+                  href="/ovo2/index.html"
+                  class="game-image-wrapper"
+                  data-game-title="Ovo 2"
+                  onclick="event.preventDefault(); openGameModal('/ovo2/index.html', 'Ovo 2');"
+                >
+                  <img
+                    src="/ovo2.png"
+                    alt="Ovo 2 - Free Online Platformer Game"
+                    class="game-image"
+                    loading="lazy"
+                    decoding="async"
+                    fetchpriority="high"
+                    itemprop="image"
+                    title="Ovo 2"
+                  />
+                </a>
+                <div class="game-info">
+                  <h3 class="game-title">Ovo 2</h3>
+                  <a href="/ovo2/index.html" class="play-btn">Play Now</a>
+                </div>
+              </div>
+
+              <!-- Vex 3 Game Card -->
+              <div
+                class="game-card"
+                itemscope
+                itemtype="https://schema.org/VideoGame"
+              >
+                <a
+                  href="/vex3/index.html"
+                  class="game-image-wrapper"
+                  data-game-title="Vex 3"
+                  onclick="event.preventDefault(); openGameModal('/vex3/index.html', 'Vex 3');"
+                >
+                  <img
+                    src="/vex3.png"
+                    alt="Vex 3 - Free Online Platformer Game"
+                    class="game-image"
+                    loading="lazy"
+                    decoding="async"
+                    itemprop="image"
+                    title="Vex 3"
+                  />
+                </a>
+                <div class="game-info">
+                  <h3 class="game-title">Vex 3</h3>
+                  <a href="/vex3/index.html" class="play-btn">Play Now</a>
+                </div>
+              </div>
+
+              <!-- Vex 4 Game Card -->
+              <div
+                class="game-card"
+                itemscope
+                itemtype="https://schema.org/VideoGame"
+              >
+                <a
+                  href="/vex4/index.html"
+                  class="game-image-wrapper"
+                  data-game-title="Vex 4"
+                  onclick="event.preventDefault(); openGameModal('/vex4/index.html', 'Vex 4');"
+                >
+                  <img
+                    src="/vex4/vex4.png"
+                    alt="Vex 4 - Free Online Platformer Game"
+                    class="game-image"
+                    loading="lazy"
+                    decoding="async"
+                    itemprop="image"
+                    title="Vex 4"
+                  />
+                </a>
+                <div class="game-info">
+                  <h3 class="game-title">Vex 4</h3>
+                  <a href="/vex4/index.html" class="play-btn">Play Now</a>
+                </div>
+              </div>
+
+              <!-- Vex 5 Game Card -->
+              <div
+                class="game-card"
+                itemscope
+                itemtype="https://schema.org/VideoGame"
+              >
+                <a
+                  href="/vex5/index.html"
+                  class="game-image-wrapper"
+                  data-game-title="Vex 5"
+                  onclick="event.preventDefault(); openGameModal('/vex5/index.html', 'Vex 5');"
+                >
+                  <img
+                    src="/vex5/vex5.jpeg"
+                    alt="Vex 5 - Free Online Platformer Game"
+                    class="game-image"
+                    loading="lazy"
+                    decoding="async"
+                    itemprop="image"
+                    title="Vex 5"
+                  />
+                </a>
+                <div class="game-info">
+                  <h3 class="game-title">Vex 5</h3>
+                  <a href="/vex5/index.html" class="play-btn">Play Now</a>
+                </div>
+              </div>
+
+              <!-- Vex 6 Game Card -->
+              <div
+                class="game-card"
+                itemscope
+                itemtype="https://schema.org/VideoGame"
+              >
+                <a
+                  href="/vex6/index.html"
+                  class="game-image-wrapper"
+                  data-game-title="Vex 6"
+                  onclick="event.preventDefault(); openGameModal('/vex6/index.html', 'Vex 6');"
+                >
+                  <img
+                    src="/vex6/assets/images/logo.png"
+                    alt="Vex 6 - Free Online Platformer Game"
+                    class="game-image"
+                    loading="lazy"
+                    decoding="async"
+                    itemprop="image"
+                    title="Vex 6"
+                  />
+                </a>
+                <div class="game-info">
+                  <h3 class="game-title">Vex 6</h3>
+                  <a href="/vex6/index.html" class="play-btn">Play Now</a>
+                </div>
+              </div>
+
+              <!-- Vex 7 Game Card -->
+              <div
+                class="game-card"
+                itemscope
+                itemtype="https://schema.org/VideoGame"
+              >
+                <a
+                  href="/vex7/index.html"
+                  class="game-image-wrapper"
+                  data-game-title="Vex 7"
+                  onclick="event.preventDefault(); openGameModal('/vex7/index.html', 'Vex 7');"
+                >
+                  <img
+                    src="/vex7/assets/images/logo.png"
+                    alt="Vex 7 - Free Online Platformer Game"
+                    class="game-image"
+                    loading="lazy"
+                    decoding="async"
+                    itemprop="image"
+                    title="Vex 7"
+                  />
+                </a>
+                <div class="game-info">
+                  <h3 class="game-title">Vex 7</h3>
+                  <a href="/vex7/index.html" class="play-btn">Play Now</a>
+                </div>
+              </div>
+
+              <!-- Vex 8 Game Card -->
+              <div
+                class="game-card"
+                itemscope
+                itemtype="https://schema.org/VideoGame"
+              >
+                <a
+                  href="/vex-8/index.html"
+                  class="game-image-wrapper"
+                  data-game-title="Vex 8"
+                  onclick="event.preventDefault(); openGameModal('/vex-8/index.html', 'Vex 8');"
+                >
+                  <img
+                    src="/vex-8/logo.png"
+                    alt="Vex 8 - Free Online Platformer Game"
+                    class="game-image"
+                    loading="lazy"
+                    decoding="async"
+                    itemprop="image"
+                    title="Vex 8"
+                  />
+                </a>
+                <div class="game-info">
+                  <h3 class="game-title">Vex 8</h3>
+                  <a href="/vex-8/index.html" class="play-btn">Play Now</a>
+                </div>
+              </div>
+
+              <!-- Vex 9 Game Card -->
+              <div
+                class="game-card"
+                itemscope
+                itemtype="https://schema.org/VideoGame"
+              >
+                <a
+                  href="/vex-9/index.html"
+                  class="game-image-wrapper"
+                  data-game-title="Vex 9"
+                  onclick="event.preventDefault(); openGameModal('/vex-9/index.html', 'Vex 9');"
+                >
+                  <img
+                    src="/vex-9/logo.png"
+                    alt="Vex 9 - Free Online Platformer Game"
+                    class="game-image"
+                    loading="lazy"
+                    decoding="async"
+                    itemprop="image"
+                    title="Vex 9"
+                  />
+                </a>
+                <div class="game-info">
+                  <h3 class="game-title">Vex 9</h3>
+                  <a href="/vex-9/index.html" class="play-btn">Play Now</a>
+                </div>
+              </div>
+
+              <!-- Vex 3 Xmas Game Card -->
+              <div
+                class="game-card"
+                itemscope
+                itemtype="https://schema.org/VideoGame"
+              >
+                <a
+                  href="/vex-3-xmas/index.html"
+                  class="game-image-wrapper"
+                  data-game-title="Vex 3 Xmas"
+                  onclick="event.preventDefault(); openGameModal('/vex-3-xmas/index.html', 'Vex 3 Xmas');"
+                >
+                  <img
+                    src="/vex-3-xmas/logo.png"
+                    alt="Vex 3 Xmas - Free Online Platformer Game"
+                    class="game-image"
+                    loading="lazy"
+                    decoding="async"
+                    itemprop="image"
+                    title="Vex 3 Xmas"
+                  />
+                </a>
+                <div class="game-info">
+                  <h3 class="game-title">Vex 3 Xmas</h3>
+                  <a href="/vex-3-xmas/index.html" class="play-btn">Play Now</a>
+                </div>
+              </div>
+
+              <!-- Vex X3M Game Card -->
+              <div
+                class="game-card"
+                itemscope
+                itemtype="https://schema.org/VideoGame"
+              >
+                <a
+                  href="/vex-x3m/index.html"
+                  class="game-image-wrapper"
+                  data-game-title="Vex X3M"
+                  onclick="event.preventDefault(); openGameModal('/vex-x3m/index.html', 'Vex X3M');"
+                >
+                  <img
+                    src="/vex-x3m/logo.png"
+                    alt="Vex X3M - Free Online Platformer Game"
+                    class="game-image"
+                    loading="lazy"
+                    decoding="async"
+                    itemprop="image"
+                    title="Vex X3M"
+                  />
+                </a>
+                <div class="game-info">
+                  <h3 class="game-title">Vex X3M</h3>
+                  <a href="/vex-x3m/index.html" class="play-btn">Play Now</a>
+                </div>
+              </div>
+
+              <!-- Vex X3M 2 Game Card -->
+              <div
+                class="game-card"
+                itemscope
+                itemtype="https://schema.org/VideoGame"
+              >
+                <a
+                  href="/vex-x3m-2/index.html"
+                  class="game-image-wrapper"
+                  data-game-title="Vex X3M 2"
+                  onclick="event.preventDefault(); openGameModal('/vex-x3m-2/index.html', 'Vex X3M 2');"
+                >
+                  <img
+                    src="/vex-x3m-2/logo.png"
+                    alt="Vex X3M 2 - Free Online Platformer Game"
+                    class="game-image"
+                    loading="lazy"
+                    decoding="async"
+                    itemprop="image"
+                    title="Vex X3M 2"
+                  />
+                </a>
+                <div class="game-info">
+                  <h3 class="game-title">Vex X3M 2</h3>
+                  <a href="/vex-x3m-2/index.html" class="play-btn">Play Now</a>
+                </div>
+              </div>
+
+              <!-- Vex Hyper Dash Game Card -->
+              <div
+                class="game-card"
+                itemscope
+                itemtype="https://schema.org/VideoGame"
+              >
+                <a
+                  href="/vex-hyper-dash/index.html"
+                  class="game-image-wrapper"
+                  data-game-title="Vex Hyper Dash"
+                  onclick="event.preventDefault(); openGameModal('/vex-hyper-dash/index.html', 'Vex Hyper Dash');"
+                >
+                  <img
+                    src="/vex-hyper-dash/logo.png"
+                    alt="Vex Hyper Dash - Free Online Platformer Game"
+                    class="game-image"
+                    loading="lazy"
+                    decoding="async"
+                    itemprop="image"
+                    title="Vex Hyper Dash"
+                  />
+                </a>
+                <div class="game-info">
+                  <h3 class="game-title">Vex Hyper Dash</h3>
+                  <a href="/vex-hyper-dash/index.html" class="play-btn"
+                    >Play Now</a
+                  >
+                </div>
+              </div>
+
+              <!-- 10 Minutes Till Dawn Game Card -->
+              <div
+                class="game-card"
+                itemscope
+                itemtype="https://schema.org/VideoGame"
+              >
+                <a
+                  href="https://hva2021.github.io/10-minutes-till-dawn/index.html"
+                  class="game-image-wrapper"
+                  data-game-title="10 Minutes Till Dawn"
+                  onclick="event.preventDefault(); openGameModal('https://hva2021.github.io/10-minutes-till-dawn/index.html', '10 Minutes Till Dawn');"
+                >
+                  <img
+                    src="https://mathsframe.github.io/alllogo/10-minutes-till-dawn/logo.png"
+                    alt="10 Minutes Till Dawn - Free Online Game"
+                    class="game-image"
+                    loading="lazy"
+                    decoding="async"
+                    itemprop="image"
+                    title="10 Minutes Till Dawn"
+                  />
+                </a>
+                <div class="game-info">
+                  <h3 class="game-title">10 Minutes Till Dawn</h3>
+                  <a
+                    href="https://hva2021.github.io/10-minutes-till-dawn/index.html"
+                    class="play-btn"
+                    >Play Now</a
+                  >
+                </div>
+              </div>
+
+              <!-- Additional Games - Generated from game list -->
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Game Modal -->
+    <div id="gameModal" class="game-modal" onclick="closeGameModal(event)">
+      <div class="game-modal-content" onclick="event.stopPropagation()">
+        <div class="game-modal-header">
+          <h2 class="game-modal-title" id="gameModalTitle">Game Loading...</h2>
+          <div class="modal-actions">
+            <button
+              class="game-modal-fullscreen"
+              onclick="toggleFullscreen()"
+              title="Toggle Fullscreen"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"
+                />
+              </svg>
+            </button>
+            <button
+              class="game-modal-close"
+              onclick="closeGameModal(event)"
+              title="Close"
+            >
+              ×
+            </button>
+          </div>
+        </div>
+        <iframe
+          id="gameModalIframe"
+          class="game-modal-iframe"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <p>© 2025 Vex 3. All Rights Reserved.</p>
+        <div class="footer-links">
+          <a href="/termsofuse.html">Terms of Service</a>
+          <a href="/privacypolicy.html">Privacy Policy</a>
+          <a href="/contact.html">Contact Us</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- External JavaScript -->
+    <script src="/js/main.js"></script>
+    <script src="/js/ads.js"></script>
+    <script src="/js/games-data.js"></script>
+
+    <!-- Search Functionality -->
+    <script>
+      function filterGames() {
+        const searchInput = document.getElementById("gameSearch");
+        const searchTerm = searchInput.value.toLowerCase().trim();
+        const gameCards = document.querySelectorAll(".game-card");
+
+        gameCards.forEach((card) => {
+          const gameTitle = card
+            .querySelector(".game-title")
+            .textContent.toLowerCase();
+
+          if (gameTitle.includes(searchTerm)) {
+            card.style.display = "block";
+          } else {
+            card.style.display = "none";
+          }
+        });
+      }
+
+      // Shuffle function - Fisher-Yates algorithm
+      function shuffleArray(array) {
+        const shuffled = [...array];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled;
+      }
+
+      // Assign size classes to game cards - Poki style layout
+      function assignGameSizes() {
+        const gameCards = document.querySelectorAll(".game-card");
+        if (gameCards.length === 0) return;
+
+        // Reset all classes
+        gameCards.forEach((card) => {
+          card.classList.remove("large", "xlarge");
+        });
+
+        // Randomly assign sizes - Poki style
+        // ~10% xlarge (3x3), ~20% large (2x2), 70% normal (1x1)
+        const cardsArray = Array.from(gameCards);
+        const totalCards = cardsArray.length;
+
+        // Calculate how many large and xlarge cards
+        const xlargeCount = Math.floor(totalCards * 0.05); // 5% xlarge
+        const largeCount = Math.floor(totalCards * 0.15); // 15% large
+
+        // Shuffle and assign
+        const shuffled = shuffleArray(cardsArray);
+
+        // Assign xlarge (3x3) - 9 icon nhỏ
+        for (let i = 0; i < xlargeCount; i++) {
+          shuffled[i].classList.add("xlarge");
+        }
+
+        // Assign large (2x2) - 4 icon nhỏ
+        for (let i = xlargeCount; i < xlargeCount + largeCount; i++) {
+          shuffled[i].classList.add("large");
+        }
+      }
+
+      // Shuffle game cards on page load
+      function shuffleGames() {
+        const gamesGrid = document.querySelector(".games-grid");
+        if (!gamesGrid) return;
+
+        const gameCards = Array.from(gamesGrid.querySelectorAll(".game-card"));
+        if (gameCards.length === 0) return;
+
+        // Assign sizes first
+        assignGameSizes();
+
+        // Shuffle the array
+        const shuffledCards = shuffleArray(gameCards);
+
+        // Clear the grid
+        gamesGrid.innerHTML = "";
+
+        // Append shuffled cards - CSS Grid with dense will auto-fill gaps
+        shuffledCards.forEach((card) => {
+          // Remove any inline grid positioning to let CSS handle it
+          card.style.gridColumn = "";
+          card.style.gridRow = "";
+          gamesGrid.appendChild(card);
+        });
+      }
+
+      // Add focus effect to search input and shuffle games
+      document.addEventListener("DOMContentLoaded", function () {
+        // Shuffle games on page load (will be called again after games are added)
+        setTimeout(shuffleGames, 500);
+
+        const searchInput = document.getElementById("gameSearch");
+
+        searchInput.addEventListener("focus", function () {
+          this.style.borderColor = "var(--neon-primary)";
+          this.style.boxShadow = "0 0 20px rgba(0, 212, 255, 0.3)";
+        });
+
+        searchInput.addEventListener("blur", function () {
+          this.style.borderColor = "rgba(0, 212, 255, 0.3)";
+          this.style.boxShadow = "none";
+        });
+      });
+    </script>
+  </body>
+</html>
